@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+게임 가격 비교 서비스(www.scan.games)를 위한 웹 서비스 프로젝트
+Node.js 10 이상, React 16 이상에서 동작합니다.
 
 ## Available Scripts
 
@@ -62,7 +63,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 ### Deployment
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
