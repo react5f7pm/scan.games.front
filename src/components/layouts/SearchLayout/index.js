@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { withRouter } from "react-router-dom"
 
 class SearchLayout extends Component {
@@ -48,6 +48,9 @@ class SearchLayout extends Component {
     const currentPath = this.props.location.pathname
     return (
       <StyledSearchLayout isMain={ currentPath === '/' }>
+        <Logo isMain={ currentPath === '/' }>
+          Scan Gamesss
+        </Logo>
         <SearchBar>
           <SearchIcon>
             <i className="fa fa-2x fa-search"></i>
@@ -82,18 +85,33 @@ const itemCenter = css`
   justify-content: center;
   align-items: center;
 `
-
+const mainBackgroundImg = 'https://i.picsum.photos/id/366/1700/900.jpg'
 const StyledSearchLayout = styled.div`
-  ${(props) => props.isMain && ({
-    background: '#2D485B',
-    height: '100vh',
-    display: 'flex',
-  })}
+  ${({ isMain }) => isMain && 
+    css`
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: url(${mainBackgroundImg});
+    `}
   ${itemCenter}
 `
 
+const Logo = styled.div`
+  color: #FFFFFF;
+  font-weight: 300;
+  font-size: 3rem;
+  position: absolute;
+  top: 30vh;
+`
+const slideFade = keyframes`
+  from {
+    opacity: 20%;
+  }
+`
 const SearchBar = styled.div`
   display: flex;
+  animation: ${slideFade} 1.2s ease-in-out;
 `
 const SearchIcon = styled.div`
   display: flex;
