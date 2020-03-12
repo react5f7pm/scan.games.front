@@ -11,13 +11,12 @@ class Router extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          {/* Main Page */}
-          <Route exact path="/" component={SearchMainPage} />
-          {/* 그 외 페이지(상단 검색바 레이아웃 적용) */}
+          {/* 검색바는 모든 페이지에서 사용됨 */}
           <Route render={
             (props) => (
               <SearchLayout {...props}>
                 <Switch>
+                  <Route exact path="/" component={SearchMainPage} />
                   <Route exact path="/search" component={SearchListPage} />
                   <Route exact path="/detail" component={GameDetailPage} />
                   <Redirect to="/" />

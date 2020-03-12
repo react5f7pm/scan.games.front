@@ -7,7 +7,6 @@ class App extends Component {
   render () {
     return (
       <StyledApp>
-        <h1 className="fade-in">스코프 기반 CSS 정의 예시를 위한 샘플</h1>
         <Router />
       </StyledApp>
     )
