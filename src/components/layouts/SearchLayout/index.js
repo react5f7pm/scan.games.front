@@ -90,10 +90,6 @@ const StyledSearchLayout = styled.div`
     display: 'flex',
   })}
   ${itemCenter}
-  /* Override */
-  .fade-in {
-    animation-delay: 0.5s !important;
-  }
 `
 
 const SearchBar = styled.div`
