@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { withRouter } from 'react-router-dom'
-import {
-  DropDown,
-  StyledInput,
-} from '../../styled/ui-components'
+import { withRouter } from "react-router-dom"
 
 class SearchLayout extends Component {
   constructor(props) {
@@ -85,23 +81,23 @@ class SearchLayout extends Component {
     let { placeholder, inputValue, isMain } = this.state
 
     return (
-      <StyledSearchLayout isMain={ isMain }>
-        <NavBar isMain={ isMain }>
-          <Logo isMain={ isMain }>
-            Scan Games
-          </Logo>
-          <SearchBar isMain={ isMain }>
-            <SearchIcon isMain={ isMain } />
-            <SearchInput
-              placeholder={ placeholder }
-              ref={(input) => { this.searchInputRef = input }}
-              type="search"
-              value={ inputValue }
-              onChange={ (e) => this.onChangeSearch(e) }
-              onKeyUp={ (e) => this.onKeyUp(e) }/>
-          </SearchBar>
-          { this.renderDeviceDropDown() }
-        </NavBar>
+      <StyledSearchLayout isMain={ currentPath === '/' }>
+        <Logo isMain={ currentPath === '/' }>
+          Scan Gamesss
+        </Logo>
+        <SearchBar>
+          <SearchIcon>
+            <i className="fa fa-2x fa-search"></i>
+          </SearchIcon>
+          <SearchInput
+            placeholder={ placeholder }
+            ref={(input) => { this.searchInputRef = input }}
+            type="text"
+            value={ inputValue }
+            onChange={(e) => this.onChangeSearch(e)}
+            onKeyUp={(e) => this.onKeyUp(e)}/>
+        </SearchBar>
+        {/* 예시) 상위 컴포넌트인 App.js에서 정의한 fade-in 클래스 사용 */}
         { this.renderContent() }
       </StyledSearchLayout>
     )
@@ -131,83 +127,33 @@ const itemCenter = css`
   justify-content: center;
   align-items: center;
 `
+const mainBackgroundImg = 'https://i.picsum.photos/id/366/1700/900.jpg'
 const StyledSearchLayout = styled.div`
-  ${({ isMain }) => isMain &&
+  ${({ isMain }) => isMain && 
     css`
+      height: 100vh;
       display: flex;
       flex-direction: column;
-    `
-  }
-  background: #2D485B;
-  height: 100vh;
+      background-image: url(${mainBackgroundImg});
+    `}
   ${itemCenter}
 `
-const slideUpNav = keyframes`
-  0% {
-    opacity: 20%;
-    height: 100vh;
-    transform: translate(0px, -50vh);
-  }
-  100% {
-    transform: translate(0px, -100vh);
-  }
-`
-const NavBar = styled.div`
-  display: flex;
-  background: #2D485B;
-  height: 7vh;
-  ${({ isMain }) => isMain
-    ? css`
-        ${itemCenter}
-      `
-    : css`
-        animation: ${slideUpNav} 1.5s ease-in-out;
-      `} 
-  } 
-`
-const slideFadeUpLogo = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`
+
 const Logo = styled.div`
   color: #FFFFFF;
   font-weight: 300;
   font-size: 3rem;
-  ${({ isMain }) => isMain
-    ? css`
-        top: 30vh;
-        position: absolute;
-      `
-    : css`
-      animation: ${slideFadeUpLogo} 4s ease-in-out;
-    `}
+  position: absolute;
+  top: 30vh;
 `
-const fadeIn = keyframes`
+const slideFade = keyframes`
   from {
     opacity: 20%;
   }
 `
-const slideUpSearchBar = keyframes`
-  0% {
-    transform: translate(0px, 100vh);
-  }
-  100% {
-    transform: translate(0px, 100vh);
-  }
-`
 const SearchBar = styled.div`
   display: flex;
-  ${({ isMain }) => isMain
-    ? css`
-        animation: ${fadeIn} 1s ease-in-out;
-      `
-    : css`
-        animation: ${slideUpSearchBar} 1.5s ease-in-out;
-      `} 
+  animation: ${slideFade} 1.2s ease-in-out;
 `
 const SearchIcon = styled.i.attrs({ className: 'fa fa-2x fa-search' })`
   display: flex;
