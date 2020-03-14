@@ -59,15 +59,15 @@ class SearchLayout extends Component {
   }
 
   onKeyUp (e) {
-    if (e.keyCode === 13) {
+    let { inputValue } = this.state
+    if (e.keyCode === 13 && inputValue.trim() !== '') {
       //  TODO: 검색 API 연동
-      const path = '/search'
-      this.props.history.push(path)
+      this.props.history.push('/search')
     }
   }
 
   render () {
-    let { placeholder, inputValue, isMain, deviceList } = this.state
+    let { placeholder, inputValue, isMain } = this.state
 
     return (
       <StyledSearchLayout isMain={ isMain }>
@@ -94,7 +94,7 @@ class SearchLayout extends Component {
       </StyledSearchLayout>
     )
   }
-
+  // TODO: 드롭다운 UI 컴포넌트 분리
   renderDeviceDropDown () {
     const currentPath = this.props.location.pathname
     let { deviceList } = this.state
@@ -147,7 +147,6 @@ const StyledSearchLayout = styled.div`
     `}
   ${itemCenter}
 `
-
 const NavBar = styled.div`
   display: flex;
   background-color: #000000;
@@ -157,7 +156,6 @@ const NavBar = styled.div`
       ${itemCenter}
     `}
 `
-
 const Logo = styled.div`
   color: #FFFFFF;
   font-weight: 300;
