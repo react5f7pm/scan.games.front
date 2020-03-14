@@ -9,6 +9,17 @@ class SearchLayout extends Component {
       inputValue: '',
       placeholder: 'scan.games 검색',
       isMain: false,
+      deviceList: [
+        {
+          name: 'desktop',
+        },
+        {
+          name: 'switch',
+        },
+        {
+          name: 'mobile',
+        },
+      ],
     }
     this.renderContent = this.renderContent.bind(this)
     this.onChangeSearch = this.onChangeSearch.bind(this)
@@ -62,7 +73,7 @@ class SearchLayout extends Component {
   }
 
   render () {
-    let { placeholder, inputValue, isMain } = this.state
+    let { placeholder, inputValue, isMain, deviceList } = this.state
 
     return (
       <StyledSearchLayout isMain={ isMain }>
@@ -75,6 +86,7 @@ class SearchLayout extends Component {
               <i className="fa fa-2x fa-search"></i>
             </SearchIcon>
             <SearchInput
+              isMain={ isMain }
               placeholder={ placeholder }
               ref={(input) => { this.searchInputRef = input }}
               type="search"
@@ -82,6 +94,7 @@ class SearchLayout extends Component {
               onChange={ (e) => this.onChangeSearch(e) }
               onKeyUp={ (e) => this.onKeyUp(e) }/>
           </SearchBar>
+          { this.renderDeviceDropDown() }
         </NavBar>
         { this.renderContent() }
       </StyledSearchLayout>
@@ -90,10 +103,34 @@ class SearchLayout extends Component {
 
   renderDeviceDropDown () {
     const currentPath = this.props.location.pathname
-    if (currentPath !== '/detail') return
     let { deviceList } = this.state
+    if (currentPath !== '/detail') return
 
     return <DropDown contentList={ deviceList } />
+  }
+
+  renderContent () {
+    const { isMain } = this.state
+    if (isMain) return
+
+    return (
+      <DropDownContainer isDetail={ currentPath === '/detail' }>
+        <DropDownIcon>
+          <i className="fa fa-2x fa-desktop"></i>
+        </DropDownIcon>
+        <DropDownContent>
+          {
+            deviceList.map((device, index) => (
+              <DeviceContent key={ index }>
+                <DeviceName href="#">
+                  { device.name }
+                </DeviceName>
+              </DeviceContent>
+            ))
+          }
+        </DropDownContent>
+      </DropDownContainer>
+    )
   }
 
   renderContent () {
@@ -126,19 +163,20 @@ const StyledSearchLayout = styled.div`
 
 const NavBar = styled.div`
   display: flex;
+  background-color: #000000;
   ${({ isMain }) => isMain && 
     css`
+      background-color: unset;
       ${itemCenter}
     `}
 `
 
 const Logo = styled.div`
-  color: #000000;
+  color: #FFFFFF;
   font-weight: 300;
   font-size: 3rem;
   ${({ isMain }) => isMain && 
     css`
-      color: #FFFFFF;
       top: 30vh;
       position: absolute;
     `}
@@ -170,9 +208,9 @@ const Input = styled.input`
   padding-left: 20px;
   border-radius: 30px;
   border: unset;
-  color: black;
-  background: #ffffff;
+  color: #FFFFFF;
   display: flex;
+  background: #000000;
   ${itemCenter};
   :focus {
     outline: none;
@@ -182,11 +220,16 @@ const SearchInput = styled(Input)`
   font-size: 20px;
   font-weight: 300;
   padding-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   ::placeholder {
     color: #6E6E73;
   }
-  background: #FFFFFF;
-  color: #000000;
+  ${({ isMain }) => isMain && 
+    css`
+      background: #FFFFFF;
+      color: unset;
+    `}
 `
 const slideUpContent = keyframes`
   from {
@@ -200,10 +243,51 @@ const ContentSection = styled.div`
   background-color: whitesmoke;
   animation: ${slideUpContent} 1.5s ease-in-out;
 
-  border: 4px solid green; /* 차후 제거 */
+const DropDownIcon = styled.div`
+  color: gray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`
+const DropDownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #FFFFFF;
+  min-width: 160px;
+  border-radius: 18px;
+`
+const DropDownContainer = styled.div`
   position: relative;
-  padding: 5% 10%;
-  height: 100%;
+  display: inline-block;
+  margin: auto;
+  &: hover ${DropDownContent} {
+    display: block;
+  }
+  &: hover ${DropDownIcon} {
+    color: #FFFFFF;
+  }
+`
+const DeviceContent = styled.div`
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-top: 1px solid #d2d2d7;
+  &: hover a {
+    text-decoration: underline;
+  }
+  &: first-child {
+    border-top-style: none;
+  }
+`
+const DeviceName = styled.a`
+  text-decoration: none;
+  color: #000000;
+`
+
+const ContentSection = styled.div`
+  border: 1px solid black;
+  background-color: lightgray;
+  min-height: 50vh;
 `
 
 export default withRouter(SearchLayout)
