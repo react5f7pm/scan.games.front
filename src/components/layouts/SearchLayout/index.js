@@ -71,7 +71,7 @@ class SearchLayout extends Component {
             <SearchInput
               placeholder={ placeholder }
               ref={(input) => { this.searchInputRef = input }}
-              type="text"
+              type="search"
               value={ inputValue }
               onChange={ (e) => this.onChangeSearch(e) }
               onKeyUp={ (e) => this.onKeyUp(e) }/>
@@ -163,6 +163,7 @@ const Input = styled.input`
 const SearchInput = styled(Input)`
   font-size: 20px;
   font-weight: 300;
+  padding-right: 20px;
   ::placeholder {
     color: #6E6E73;
   }
