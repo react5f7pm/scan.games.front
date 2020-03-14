@@ -7,25 +7,37 @@ class SearchLayout extends Component {
     super(props)
     this.state = {
       inputValue: '',
-      placeholder: 'scan.games 검색'
+      placeholder: 'scan.games 검색',
+      isMain: false,
     }
     this.renderContent = this.renderContent.bind(this)
     this.onChangeSearch = this.onChangeSearch.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
+    this.detectCurrentPath = this.detectCurrentPath.bind(this)
   }
 
   componentDidMount () {
     if (this.searchInputRef) {
       this.searchInputRef.focus()
     }
+    this.detectCurrentPath()
+  }
+
+  detectCurrentPath () {
+    const currentPath = this.props.location.pathname
+    this.setState({
+      isMain: currentPath === '/',
+    })
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props !== prevProps &&
-        this.props.location.pathname === '/') {
-      this.setState({
-        inputValue: '',
-      })
+    if (this.props !== prevProps) {
+      if (this.props.location.pathname === '/') {
+        this.setState({
+          inputValue: '',
+        })
+      }
+      this.detectCurrentPath()
     }
   }
 
@@ -44,26 +56,27 @@ class SearchLayout extends Component {
   }
 
   render () {
-    let { placeholder, inputValue } = this.state
-    const currentPath = this.props.location.pathname
+    let { placeholder, inputValue, isMain } = this.state
+
     return (
-      <StyledSearchLayout isMain={ currentPath === '/' }>
-        <Logo isMain={ currentPath === '/' }>
-          Scan Gamesss
-        </Logo>
-        <SearchBar>
-          <SearchIcon>
-            <i className="fa fa-2x fa-search"></i>
-          </SearchIcon>
-          <SearchInput
-            placeholder={ placeholder }
-            ref={(input) => { this.searchInputRef = input }}
-            type="text"
-            value={ inputValue }
-            onChange={(e) => this.onChangeSearch(e)}
-            onKeyUp={(e) => this.onKeyUp(e)}/>
-        </SearchBar>
-        {/* 예시) 상위 컴포넌트인 App.js에서 정의한 fade-in 클래스 사용 */}
+      <StyledSearchLayout isMain={ isMain }>
+        <NavBar isMain={ isMain }>
+          <Logo isMain={ isMain }>
+            Scan Games
+          </Logo>
+          <SearchBar>
+            <SearchIcon>
+              <i className="fa fa-2x fa-search"></i>
+            </SearchIcon>
+            <SearchInput
+              placeholder={ placeholder }
+              ref={(input) => { this.searchInputRef = input }}
+              type="text"
+              value={ inputValue }
+              onChange={ (e) => this.onChangeSearch(e) }
+              onKeyUp={ (e) => this.onKeyUp(e) }/>
+          </SearchBar>
+        </NavBar>
         { this.renderContent() }
       </StyledSearchLayout>
     )
@@ -97,12 +110,24 @@ const StyledSearchLayout = styled.div`
   ${itemCenter}
 `
 
+const NavBar = styled.div`
+  display: flex;
+  ${({ isMain }) => isMain && 
+    css`
+      ${itemCenter}
+    `}
+`
+
 const Logo = styled.div`
-  color: #FFFFFF;
+  color: #000000;
   font-weight: 300;
   font-size: 3rem;
-  position: absolute;
-  top: 30vh;
+  ${({ isMain }) => isMain && 
+    css`
+      color: #FFFFFF;
+      top: 30vh;
+      position: absolute;
+    `}
 `
 const slideFade = keyframes`
   from {
@@ -116,6 +141,7 @@ const SearchBar = styled.div`
 const SearchIcon = styled.div`
   display: flex;
   ${itemCenter}
+  padding-left: 10px;
   padding-right: 10px;
   color: gray;
   opacity: 0.8;
@@ -131,7 +157,7 @@ const Input = styled.input`
   display: flex;
   ${itemCenter};
   :focus {
-    outline:none;
+    outline: none;
   }
 `
 const SearchInput = styled(Input)`
