@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import styled, { css, keyframes } from 'styled-components'
-import { withRouter } from "react-router-dom"
+import { withRouter } from 'react-router-dom'
+import {
+  DropDown,
+} from '../../styled/ui-components'
 
 class SearchLayout extends Component {
   constructor(props) {
@@ -43,7 +46,8 @@ class SearchLayout extends Component {
 
   componentDidUpdate (prevProps) {
     if (this.props !== prevProps) {
-      if (this.props.location.pathname === '/') {
+      const currentPath = this.props.location.pathname
+      if (currentPath === '/') {
         this.setState({
           inputValue: '',
         })
@@ -94,37 +98,13 @@ class SearchLayout extends Component {
       </StyledSearchLayout>
     )
   }
-  // TODO: 드롭다운 UI 컴포넌트 분리
+
   renderDeviceDropDown () {
     const currentPath = this.props.location.pathname
-    let { deviceList } = this.state
     if (currentPath !== '/detail') return
+    let { deviceList } = this.state
 
     return <DropDown contentList={ deviceList } />
-  }
-
-  renderContent () {
-    const { isMain } = this.state
-    if (isMain) return
-
-    return (
-      <DropDownContainer isDetail={ currentPath === '/detail' }>
-        <DropDownIcon>
-          <i className="fa fa-2x fa-desktop"></i>
-        </DropDownIcon>
-        <DropDownContent>
-          {
-            deviceList.map((device, index) => (
-              <DeviceContent key={ index }>
-                <DeviceName href="#">
-                  { device.name }
-                </DeviceName>
-              </DeviceContent>
-            ))
-          }
-        </DropDownContent>
-      </DropDownContainer>
-    )
   }
 
   renderContent () {
@@ -223,59 +203,6 @@ const SearchInput = styled(Input)`
       color: unset;
     `}
 `
-const slideUpContent = keyframes`
-  from {
-    opacity: 0%;
-  }
-  to {
-    opacity: 100%;
-  }
-`
-const ContentSection = styled.div`
-  background-color: whitesmoke;
-  animation: ${slideUpContent} 1.5s ease-in-out;
-
-const DropDownIcon = styled.div`
-  color: gray;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`
-const DropDownContent = styled.div`
-  display: none;
-  position: absolute;
-  background-color: #FFFFFF;
-  min-width: 160px;
-  border-radius: 18px;
-`
-const DropDownContainer = styled.div`
-  position: relative;
-  display: inline-block;
-  margin: auto;
-  &: hover ${DropDownContent} {
-    display: block;
-  }
-  &: hover ${DropDownIcon} {
-    color: #FFFFFF;
-  }
-`
-const DeviceContent = styled.div`
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  border-top: 1px solid #d2d2d7;
-  &: hover a {
-    text-decoration: underline;
-  }
-  &: first-child {
-    border-top-style: none;
-  }
-`
-const DeviceName = styled.a`
-  text-decoration: none;
-  color: #000000;
-`
-
 const ContentSection = styled.div`
   border: 1px solid black;
   background-color: lightgray;
