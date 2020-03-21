@@ -3,6 +3,7 @@ import styled, { css, keyframes } from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import {
   DropDown,
+  StyledInput,
 } from '../../styled/ui-components'
 
 class SearchLayout extends Component {
@@ -170,21 +171,7 @@ const SearchIcon = styled.div`
   color: gray;
   opacity: 0.8;
 `
-const Input = styled.input`
-  width: 800px;
-  height: 50px;
-  padding-left: 20px;
-  border-radius: 30px;
-  border: unset;
-  color: #FFFFFF;
-  display: flex;
-  background: #000000;
-  ${itemCenter};
-  :focus {
-    outline: none;
-  }
-`
-const SearchInput = styled(Input)`
+const SearchInput = styled(StyledInput)`
   font-size: 20px;
   font-weight: 300;
   padding-right: 20px;
