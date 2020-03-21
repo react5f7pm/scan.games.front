@@ -80,12 +80,11 @@ class SearchLayout extends Component {
           <Logo isMain={ isMain }>
             Scan Games
           </Logo>
-          <SearchBar>
+          <SearchBar isMain={ isMain }>
             <SearchIcon>
               <i className="fa fa-2x fa-search"></i>
             </SearchIcon>
             <SearchInput
-              isMain={ isMain }
               placeholder={ placeholder }
               ref={(input) => { this.searchInputRef = input }}
               type="search"
@@ -124,25 +123,40 @@ const itemCenter = css`
   justify-content: center;
   align-items: center;
 `
-const mainBackgroundImg = 'https://i.picsum.photos/id/366/1700/900.jpg'
 const StyledSearchLayout = styled.div`
-  ${({ isMain }) => isMain && 
+  ${({ isMain }) => isMain &&
     css`
-      height: 100vh;
       display: flex;
       flex-direction: column;
-      background-image: url(${mainBackgroundImg});
-    `}
+    `
+  }
+  background: #2D485B;
+  height: 100vh;
   ${itemCenter}
+`
+const slideUpNav = keyframes`
+  0% {
+    opacity: 20%;
+    height: 100vh;
+    transform: translate(0px, 0px);
+  }
+  100% {
+    height: 7vh;
+    transform: translate(0px, -100vh);
+  }
 `
 const NavBar = styled.div`
   display: flex;
-  background-color: #000000;
-  ${({ isMain }) => isMain && 
-    css`
-      background-color: unset;
-      ${itemCenter}
-    `}
+  background: #2D485B;
+  height: 7vh;
+  ${({ isMain }) => isMain
+    ? css`
+        ${itemCenter}
+      `
+    : css`
+        animation: ${slideUpNav} 1.5s ease-in-out;
+      `} 
+  } 
 `
 const Logo = styled.div`
   color: #FFFFFF;
@@ -154,14 +168,30 @@ const Logo = styled.div`
       position: absolute;
     `}
 `
-const slideFade = keyframes`
+const fadeIn = keyframes`
   from {
     opacity: 20%;
   }
 `
+const slideUpSearchBar = keyframes`
+  0% {
+    height: 100vh;
+    transform: translate(0px, 50vh);
+  }
+  100% {
+    height: 100vh;
+    transform: translate(0px, 100vh);
+  }
+`
 const SearchBar = styled.div`
   display: flex;
-  animation: ${slideFade} 1.2s ease-in-out;
+  ${({ isMain }) => isMain
+    ? css`
+        animation: ${fadeIn} 1s ease-in-out;
+      `
+    : css`
+        animation: ${slideUpSearchBar} 1.5s ease-in-out;
+      `} 
 `
 const SearchIcon = styled.div`
   display: flex;
@@ -180,16 +210,22 @@ const SearchInput = styled(StyledInput)`
   ::placeholder {
     color: #6E6E73;
   }
-  ${({ isMain }) => isMain && 
-    css`
-      background: #FFFFFF;
-      color: unset;
-    `}
+  background: #FFFFFF;
+  color: #000000;
+`
+const slideUpContent = keyframes`
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 `
 const ContentSection = styled.div`
   border: 1px solid black;
   background-color: lightgray;
-  min-height: 50vh;
+  height: 93vh;
+  animation: ${slideUpContent} 1.5s ease-in-out;
 `
 
 export default withRouter(SearchLayout)
