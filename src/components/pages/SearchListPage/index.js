@@ -10,7 +10,7 @@ class SearchListPage extends Component {
   render () {
     return (
       <SearchListContainer>
-        {/* <SearchList>
+        <SearchList>
           { 
             new Array(10).fill(1).map((i, idx) =>
               <SearchItem key={idx}>
@@ -21,8 +21,8 @@ class SearchListPage extends Component {
               </SearchItem>
             )
           }
-        </SearchList> */}
-        <LoadingIndicator showLoading={true} fillScreen={true} />
+        </SearchList>
+        {/* <LoadingIndicator showLoading={true} fillScreen={true} /> */}
       </SearchListContainer>
     )
   }
@@ -30,14 +30,15 @@ class SearchListPage extends Component {
 
 const SearchListContainer = styled.div`
   display: flex;
-  position: relative;
   flex-direction: column;
   min-height: inherit;
+  padding: 5% 15%;
 `
 
 const SearchList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-gap: 15px;
 `
 
 const SearchItem = styled(StyledCard)`
