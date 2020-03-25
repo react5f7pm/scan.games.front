@@ -3,33 +3,36 @@ import styled from 'styled-components'
 
 import {
   StyledCard,
+  LoadingIndicator,
 } from '../../styled/ui-components'
 
 class SearchListPage extends Component {
   render () {
     return (
-      <Container>
-      <SearchList>
-        { 
-          new Array(10).fill(1).map((i, idx) =>
-            <SearchItem key={idx}>
-              <ThumbnailImg src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" />
-              <ProductInfo>
-                어새신 구리드
-              </ProductInfo>
-            </SearchItem>
-          )
-        }
-      </SearchList>
-      </Container>
+      <SearchListContainer>
+        {/* <SearchList>
+          { 
+            new Array(10).fill(1).map((i, idx) =>
+              <SearchItem key={idx}>
+                <ThumbnailImg src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" />
+                <ProductInfo>
+                  어새신 구리드
+                </ProductInfo>
+              </SearchItem>
+            )
+          }
+        </SearchList> */}
+        <LoadingIndicator showLoading={true} fillScreen={true} />
+      </SearchListContainer>
     )
   }
 }
 
-const Container = styled.div`
+const SearchListContainer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
-  border: 1px solid red;
+  min-height: inherit;
 `
 
 const SearchList = styled.div`
