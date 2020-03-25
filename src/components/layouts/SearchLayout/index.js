@@ -91,9 +91,7 @@ class SearchLayout extends Component {
             Scan Games
           </Logo>
           <SearchBar isMain={ isMain }>
-            <SearchIcon>
-              <i className="fa fa-2x fa-search"></i>
-            </SearchIcon>
+            <SearchIcon isMain={ isMain } />
             <SearchInput
               placeholder={ placeholder }
               ref={(input) => { this.searchInputRef = input }}
@@ -215,7 +213,13 @@ const SearchBar = styled.div`
         animation: ${slideUpSearchBar} 1.5s ease-in-out;
       `} 
 `
-const SearchIcon = styled.i.attrs({ className: 'fa fa-2x fa-search' })`
+//  TODO: 아이콘 태그를 styled-component에서 어떻게 쓰는지 아래 주소를 참고했는데, 개선이 필요합니다.
+//  https://stackoverflow.com/questions/48607218/styled-components-how-to-display-an-icon
+const Icon = (props) => {
+  //  NOTE: ${props.className} 를 꼭 보내야 화면에 렌더된다고 합니다.
+  return <i className={`fa fa-2x fa-search ${props.className}`}></i>
+}
+const SearchIcon = styled(Icon)`
   display: flex;
   ${itemCenter}
   padding-left: 10px;
