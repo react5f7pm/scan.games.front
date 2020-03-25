@@ -39,10 +39,14 @@ class SearchLayout extends Component {
   }
 
   detectCurrentPath () {
-    const currentPath = this.props.location.pathname
-    this.setState({
-      isMain: currentPath === '/',
-    })
+    let { location } = this.props
+    const currentPath = location.pathname
+    let isMain = false
+    //  NOTE: 최초 렌더시에는 props.location의 state값이 ud이다.
+    if (location.state === undefined) {
+      isMain = currentPath === '/'
+    }
+    this.setState({ isMain })
   }
 
   componentDidUpdate (prevProps) {
@@ -67,7 +71,13 @@ class SearchLayout extends Component {
     let { inputValue } = this.state
     if (e.keyCode === 13 && inputValue.trim() !== '') {
       //  TODO: 검색 API 연동
-      this.props.history.push('/search')
+      this.props.history.push({
+        pathname: '/search',
+        state: {
+          //  TODO: 각 페이지에서 라우트 이동시 이전 페이지 path 넘기기
+          prevPath: this.props.location.pathname
+        }
+      })
     }
   }
 
@@ -158,14 +168,26 @@ const NavBar = styled.div`
       `} 
   } 
 `
+const slideFadeUpLogo = keyframes`
+  from {
+    opacity: 0;
+    transform: translate(0px, 0px);
+  }
+  to {
+    opacity: 1;
+  }
+`
 const Logo = styled.div`
   color: #FFFFFF;
   font-weight: 300;
   font-size: 3rem;
-  ${({ isMain }) => isMain && 
-    css`
-      top: 30vh;
-      position: absolute;
+  ${({ isMain }) => isMain
+    ? css`
+        top: 30vh;
+        position: absolute;
+      `
+    : css`
+      animation: ${slideFadeUpLogo} 4s ease-in-out;
     `}
 `
 const fadeIn = keyframes`
