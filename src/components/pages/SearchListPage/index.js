@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import {
@@ -63,7 +64,7 @@ class SearchListPage extends Component {
   }
 
   renderSearchItem (searchItem, index) {
-    const { name, thumbnail, originalPrice, priceList } = searchItem
+    const { productId, name, thumbnail, originalPrice, priceList } = searchItem
 
     // 한글 변수명도 되니까 한번 해봤는데 이런건 어떠신가요?
     let 최저가 = priceList.reduce((lowestItem, priceItem) =>
@@ -73,7 +74,6 @@ class SearchListPage extends Component {
 
     const { name: platformName, logoImg } = PLATFORM[최저가.platformId]
 
-    console.log(platformName)
     return (
       <SearchItem key={ index }>
         <ThumbnailImg src={ thumbnail } />
@@ -93,9 +93,11 @@ class SearchListPage extends Component {
               <img src={ logoImg } alt={ platformName } />
             </span>
           </div>
-          <div className="more-product-stores">
+          {/* TODO: 파라미터 명은 임의로 넣음 - 차후 스키마 보고 수정 */}
+          {/* 애니메이션 필요하면 Link 쓰지말고 직접 구현 */}
+          <DetailLink to={`/detail?productId=${productId}`}>
             + { priceList.length - 1 } more store
-          </div>
+          </DetailLink>
         </ProductInfo>
       </SearchItem>
     )
@@ -207,12 +209,16 @@ const ProductInfo = styled.div`
       }
     }
   }
+`
 
-  .more-product-stores {
-    flex: 0;
-    font-size: 8pt;
-    text-align: right;
-  }
+const DetailLink = styled(Link)`
+  flex: 0;
+  text-align: right;
+  font-size: 9pt;
+  color: gray;
+
+  text-decoration: none;
+  cursor: pointer;
 `
 
 export default SearchListPage
