@@ -22,7 +22,7 @@ export const LoadingIndicator = (props) => props.showLoading ?
     <AnimateDot delay="0.75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/768px-Steam_icon_logo.svg.png" />
     <AnimateDot delay="1.2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/768px-Steam_icon_logo.svg.png" />
   </LoadingWrapper>
-  : <></>
+  : props.children
 
 LoadingIndicator.propTypes = propTypes
 LoadingIndicator.defaultProps = defaultProps
