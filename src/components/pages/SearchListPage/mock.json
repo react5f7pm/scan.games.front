@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Assasin's Creed Odyssey 1",
+    "originalPrice": 48000,
+    "thumbnail": "https://cdn-products.eneba.com/resized-products/f9jvrf3nwdgdil287sla_390x400_1x-0.jpg",
+    "priceList": [
+      {
+        "platformId": "Origin",
+        "price": 24000
+      },
+      {
+        "platformId": "Steam",
+        "price": 32000
+      },
+      {
+        "platformId": "Nintendo",
+        "price": 27000
+      }
+    ]
+  },
+  {
+    "name": "Assasin's Creed Odyssey 2",
+    "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/911400/header.jpg?t=1553879054",
+    "originalPrice": 48000,
+    "priceList": [
+      {
+        "platformId": "Origin",
+        "price": 24000
+      },
+      {
+        "platformId": "Steam",
+        "price": 32000
+      },
+      {
+        "platformId": "Nintendo",
+        "price": 27000
+      }
+    ]
+  },
+  {
+    "name": "Assasin's Creed Odyssey 3",
+    "thumbnail": "https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fassassins-creed-syndicate%2Fhome%2FACS-STD-2560x1440-635b7b6c86f18730071426375e7c4fe0bd831ddd.jpg?h=1080&resize=1&w=1920",
+    "originalPrice": 48000,
+    "priceList": [
+      {
+        "platformId": "Origin",
+        "price": 24000
+      },
+      {
+        "platformId": "Steam",
+        "price": 32000
+      },
+      {
+        "platformId": "Nintendo",
+        "price": 27000
+      }
+    ]
+  }
+]

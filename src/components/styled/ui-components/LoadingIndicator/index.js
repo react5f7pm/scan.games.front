@@ -12,8 +12,8 @@ const propTypes = {
 
 const defaultProps = {
   fillScreen: false,
-  width: 'inherit',
-  height: 'inherit',
+  width: '100%',
+  height: '100%',
 }
 
 export const LoadingIndicator = (props) => props.showLoading ?
@@ -28,6 +28,10 @@ LoadingIndicator.propTypes = propTypes
 LoadingIndicator.defaultProps = defaultProps
 
 const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -59,6 +63,7 @@ const AnimateDot = styled.div`
   /* border-radius: 50%; */
   width: 50px;
   height: 50px;
+
   /* background-color: black; */
   background-image: url("${props => props.src}");
   background-size: cover;
@@ -79,31 +84,31 @@ const AnimateDot = styled.div`
       transform: scale(1.2, 0.6);
     }
     15% {
-      transform: scale(0.8, 1.1) translateY(-50px);
+      transform: scale(0.8, 1.1) translateY(-70px);
     }
     25% {
       transform: scale(1.05, 0.8) translateY(0);
     }
     30% {
-      transform: scale(0.9, 1.05) translateY(-30px);
+      transform: scale(0.9, 1.05) translateY(-40px);
     }
     40% {
       transform: scale(1.025, 0.9) translateY(0);
     }
     50% {
-      transform: scale(1) translateY(-18px);
+      transform: scale(1) translateY(-22px);
     }
     55% {
       transform: translateY(0);
     }
     65% {
-      transform: translateY(-10.8px);
+      transform: translateY(-12px);
     }
     75% {
       transform: translateY(0);
     }
     80% {
-      transform: translateY(-6.5px);
+      transform: translateY(-6px);
     }
     90% {
       transform: translateY(0);
