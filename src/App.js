@@ -17,7 +17,7 @@ const StyledApp = styled.div`
   background-color: white;
   /* CSS 정의 예시 */
   .fade-in {
-    /* animation-name: fade-in; */
+    animation-name: fade-in;
     animation-delay: 1s;
     animation-duration: 1s;
     animation-iteration-count: infinite;
