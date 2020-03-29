@@ -74,7 +74,7 @@ class SearchListPage extends Component {
     const response = await new Promise ((resolve) => {
       setTimeout(() => resolve(Mock), 7000)
     })
-    this.setState({
+    await this.setState({
       isLoaded: true,
       searchList: response,
     })
