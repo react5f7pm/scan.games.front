@@ -2,7 +2,7 @@ const bindAllMethods = (that) => {
   const prototype = Object.getPrototypeOf(that)
   const methodNames = Object.getOwnPropertyNames(prototype)
   methodNames.forEach((methodName) => {
-    that[methodName] = prototype[methodName]
+    that[methodName] = prototype[methodName].bind(that)
   })
 }
 

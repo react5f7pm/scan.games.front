@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import {
   StyledCard,
@@ -75,7 +75,7 @@ class SearchListPage extends Component {
     const { name: platformName, logoImg } = PLATFORM[최저가.platformId]
 
     return (
-      <SearchItem key={ index }>
+      <SearchItem key={ index } fadeDelay={ index }>
         <ThumbnailImg src={ thumbnail } />
         <ProductInfo>
           <div className="product-name">{ name }</div>
@@ -105,7 +105,7 @@ class SearchListPage extends Component {
 
   async requestSearchList (keyword) {
     const response = await new Promise ((resolve) => {
-      setTimeout(() => resolve(Mock), 1000)
+      setTimeout(() => resolve(Mock), 5000)
     })
     await this.setState({
       isLoaded: true,
@@ -115,6 +115,7 @@ class SearchListPage extends Component {
 }
 
 const SearchListContainer = styled.div`
+  /* TODO: 보더는 바깥쪽 레이아웃 잘 잡히면 그 때 제거 예정 */
   border: 4px solid red;
   display: flex;
   flex-direction: column;
@@ -139,6 +140,23 @@ const SearchItem = styled(StyledCard)`
   flex-direction: column;
 
   padding: 0;
+
+  animation-name: ${() => fadeIn};
+  animation-delay: ${props => `${props.fadeDelay / 3.0}s`};
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+`
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `
 
 const ThumbnailImg = styled.div`
