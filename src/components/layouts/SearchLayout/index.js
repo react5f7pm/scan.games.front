@@ -146,10 +146,9 @@ const slideUpNav = keyframes`
   0% {
     opacity: 20%;
     height: 100vh;
-    transform: translate(0px, 0px);
+    transform: translate(0px, -50vh);
   }
   100% {
-    height: 7vh;
     transform: translate(0px, -100vh);
   }
 `
@@ -169,7 +168,6 @@ const NavBar = styled.div`
 const slideFadeUpLogo = keyframes`
   from {
     opacity: 0;
-    transform: translate(0px, 0px);
   }
   to {
     opacity: 1;
@@ -195,11 +193,9 @@ const fadeIn = keyframes`
 `
 const slideUpSearchBar = keyframes`
   0% {
-    height: 100vh;
-    transform: translate(0px, 50vh);
+    transform: translate(0px, 100vh);
   }
   100% {
-    height: 100vh;
     transform: translate(0px, 100vh);
   }
 `
