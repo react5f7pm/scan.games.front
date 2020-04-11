@@ -146,10 +146,9 @@ const slideUpNav = keyframes`
   0% {
     opacity: 20%;
     height: 100vh;
-    transform: translate(0px, 0px);
+    transform: translate(0px, -50vh);
   }
   100% {
-    height: 7vh;
     transform: translate(0px, -100vh);
   }
 `
@@ -169,7 +168,6 @@ const NavBar = styled.div`
 const slideFadeUpLogo = keyframes`
   from {
     opacity: 0;
-    transform: translate(0px, 0px);
   }
   to {
     opacity: 1;
@@ -195,11 +193,9 @@ const fadeIn = keyframes`
 `
 const slideUpSearchBar = keyframes`
   0% {
-    height: 100vh;
-    transform: translate(0px, 50vh);
+    transform: translate(0px, 100vh);
   }
   100% {
-    height: 100vh;
     transform: translate(0px, 100vh);
   }
 `
@@ -213,13 +209,7 @@ const SearchBar = styled.div`
         animation: ${slideUpSearchBar} 1.5s ease-in-out;
       `} 
 `
-//  TODO: 아이콘 태그를 styled-component에서 어떻게 쓰는지 아래 주소를 참고했는데, 개선이 필요합니다.
-//  https://stackoverflow.com/questions/48607218/styled-components-how-to-display-an-icon
-const Icon = (props) => {
-  //  NOTE: ${props.className} 를 꼭 보내야 화면에 렌더된다고 합니다.
-  return <i className={`fa fa-2x fa-search ${props.className}`}></i>
-}
-const SearchIcon = styled(Icon)`
+const SearchIcon = styled.i.attrs({ className: 'fa fa-2x fa-search' })`
   display: flex;
   ${itemCenter}
   padding-left: 10px;
@@ -252,13 +242,10 @@ const slideUpContent = keyframes`
   }
 `
 const ContentSection = styled.div`
-  background-color: whitesmoke;
+  border: 1px solid black;
+  background-color: lightgray;
+  height: 93vh;
   animation: ${slideUpContent} 1.5s ease-in-out;
-
-  border: 4px solid green; /* 차후 제거 */
-  position: relative;
-  padding: 5% 10%;
-  height: 100%;
 `
 
 export default withRouter(SearchLayout)
