@@ -140,6 +140,7 @@ const StyledSearchLayout = styled.div`
   }
   background: #2D485B;
   height: 100vh;
+  overflow: hidden; 
   ${itemCenter}
 `
 const slideUpNav = keyframes`
@@ -242,9 +243,10 @@ const slideUpContent = keyframes`
   }
 `
 const ContentSection = styled.div`
-  border: 1px solid black;
-  background-color: lightgray;
-  height: 93vh;
+  background-color: whitesmoke;
+  height: 85vh;
+  overflow: auto;
+  padding: 4vh 15%;
   animation: ${slideUpContent} 1.5s ease-in-out;
 `
 
