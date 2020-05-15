@@ -115,8 +115,6 @@ class SearchListPage extends Component {
 }
 
 const SearchListContainer = styled.div`
-  /* TODO: 보더는 바깥쪽 레이아웃 잘 잡히면 그 때 제거 예정 */
-  border: 4px solid red;
   display: flex;
   flex-direction: column;
 `
