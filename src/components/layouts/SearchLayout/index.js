@@ -242,13 +242,10 @@ const slideUpContent = keyframes`
   }
 `
 const ContentSection = styled.div`
-  background-color: whitesmoke;
+  border: 1px solid black;
+  background-color: lightgray;
+  height: 93vh;
   animation: ${slideUpContent} 1.5s ease-in-out;
-
-  border: 4px solid green; /* 차후 제거 */
-  position: relative;
-  padding: 5% 10%;
-  height: 100%;
 `
 
 export default withRouter(SearchLayout)
