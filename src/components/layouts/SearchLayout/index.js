@@ -43,7 +43,7 @@ class SearchLayout extends Component {
     const currentPath = location.pathname
     let isMain = false
     //  NOTE: 최초 렌더시에는 props.location의 state값이 ud이다.
-    if (location.state === undefined) {
+    if (!location.state) {
       isMain = currentPath === '/'
     }
     this.setState({ isMain })
@@ -69,13 +69,13 @@ class SearchLayout extends Component {
 
   onKeyUp (e) {
     let { inputValue } = this.state
-    if (e.keyCode === 13 && inputValue.trim() !== '') {
-      //  TODO: 검색 API 연동
+    if (e.keyCode === 13) {
       this.props.history.push({
         pathname: '/search',
         state: {
           //  TODO: 각 페이지에서 라우트 이동시 이전 페이지 path 넘기기
-          prevPath: this.props.location.pathname
+          prevPath: this.props.location.pathname,
+          keyword: inputValue.trim(),
         }
       })
     }

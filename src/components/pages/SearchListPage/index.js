@@ -39,7 +39,8 @@ class SearchListPage extends Component {
     bindAllMethods(this)
   }
   componentDidMount () {
-    this.requestSearchList(this.props.keyword)
+    const { keyword } = this.props.location.state
+    this.requestSearchList(keyword)
   }
   render () {
     const { isLoaded, searchList } = this.state
