@@ -14,18 +14,20 @@ import {
 
 import Mock from './mock.json'
 
+// TODO: const로 옮기기
+const PLATFORM_LOGO_PATH = 'static/img/platform/'
 const PLATFORM = {
   STEAM: {
     name: 'Steam',
-    logoImg: 'https://pngimage.net/wp-content/uploads/2018/06/steam-logo-png-7.png',
+    logoImg: 'steam/logo-store.png',
   },
   ORIGIN: {
     name: 'Origin',
-    logoImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Origin.svg/1280px-Origin.svg.png',
+    logoImg: 'origin/logo-store.png',
   },
   PLAYSTATION: {
     name: 'PlayStation',
-    logoImg: 'https://ww.namu.la/s/951f943def954ab8d00d6afdb323afbefcd4cc85eba464556e508dc4f42b7f09fa7fd7fc54995ab52df092e6af1b37404fb83650833f91247a491aeda4ee500a911997231b6536094a2af5ac134fa60fbd931d355e07fa8fc9854dd5bd67d294',
+    logoImg: 'playstation/logo-store.png',
   },
 }
 
@@ -38,10 +40,19 @@ class SearchListPage extends Component {
     }
     bindAllMethods(this)
   }
+
   componentDidMount () {
     const { keyword } = this.props.location.state
     this.requestSearchList(keyword)
   }
+
+  componentDidUpdate (prevProps) {
+    const { keyword } = this.props.location.state
+    if (prevProps.location.state.keyword !== keyword) {
+      this.requestSearchList(keyword)
+    }
+  }
+
   render () {
     const { isLoaded, searchList } = this.state
     return (
@@ -90,9 +101,10 @@ class SearchListPage extends Component {
                 { 할인율 }%
               </span>
             }
-            <span className="platform-logo">
-              <img src={ logoImg } alt={ platformName } />
-            </span>
+            <div className="platform-logo">
+              <img src={ PLATFORM_LOGO_PATH + logoImg }
+                   alt={ platformName } />
+            </div>
           </div>
           {/* TODO: 파라미터 명은 임의로 넣음 - 차후 스키마 보고 수정 */}
           {/* 애니메이션 필요하면 Link 쓰지말고 직접 구현 */}
@@ -105,9 +117,12 @@ class SearchListPage extends Component {
   }
 
   async requestSearchList (keyword) {
+    await this.setState({ isLoaded: false })
+
     const response = await new Promise ((resolve) => {
       setTimeout(() => resolve(Mock), 5000)
     })
+
     await this.setState({
       isLoaded: true,
       searchList: response,
@@ -212,16 +227,16 @@ const ProductInfo = styled.div`
     .platform-logo {
       flex: auto;
 
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-end;
 
       height: 20px;
-      overflow: hidden;
+      max-height: 20px;
 
       img {
-        max-width: 100%;
+        max-width: 50%;
         max-height: 100%;
       }
     }

@@ -248,6 +248,7 @@ const slideUpContent = keyframes`
   }
 `
 const ContentSection = styled.div`
+  position: relative;
   background-color: whitesmoke;
   height: 85vh;
   overflow: auto;

@@ -16,11 +16,13 @@ const defaultProps = {
   height: '100%',
 }
 
+const PLATFORM_LOGO_PATH = ''
+
 export const LoadingIndicator = (props) => props.showLoading ?
   <LoadingWrapper {...props}>
-    <AnimateDot delay="0.33" src="https://media.playstation.com/is/image/SCEA/playstation-store-bag-spotlight-01-us-12jun17?$native_t$" />
-    <AnimateDot delay="0.75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/768px-Steam_icon_logo.svg.png" />
-    <AnimateDot delay="1.2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/768px-Steam_icon_logo.svg.png" />
+    <AnimateDot delay="0.33" src="static/img/platform/playstation/logo.png" />
+    <AnimateDot delay="0.75" src="static/img/platform/steam/logo.png" />
+    <AnimateDot delay="1.2" src="static/img/platform/origin/logo.png" />
   </LoadingWrapper>
   : props.children
 
@@ -58,16 +60,11 @@ const LoadingWrapper = styled.div`
   background-color: #00000022;
 `
 
-const AnimateDot = styled.div`
-  /* border: 1px solid gray; */
-  /* border-radius: 50%; */
-  width: 50px;
-  height: 50px;
+const AnimateDot = styled.img`
+  display: block;
 
-  /* background-color: black; */
-  background-image: url("${props => props.src}");
-  background-size: cover;
-  background-repeat: no-repeat;
+  width: 50px;
+  margin: 15px;
 
   animation-name: bouncing;
   animation-duration: ${(props) => props.delay / 1.618 + 1.618}s;
@@ -75,7 +72,6 @@ const AnimateDot = styled.div`
   animation-iteration-count: infinite;
   animation-timing-function: ease-out;
 
-  margin: 15px;
   @keyframes bouncing {
     0% {
       transform: translateY(0);  
