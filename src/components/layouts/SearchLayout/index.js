@@ -5,6 +5,9 @@ import {
   DropDown,
   StyledInput,
 } from '../../styled/ui-components'
+import {
+  bindAllMethods,
+} from '../../../utilities/common'
 
 class SearchLayout extends Component {
   constructor(props) {
@@ -25,10 +28,7 @@ class SearchLayout extends Component {
         },
       ],
     }
-    this.renderContent = this.renderContent.bind(this)
-    this.onChangeSearch = this.onChangeSearch.bind(this)
-    this.onKeyUp = this.onKeyUp.bind(this)
-    this.detectCurrentPath = this.detectCurrentPath.bind(this)
+    bindAllMethods(this)
   }
 
   componentDidMount () {
@@ -81,13 +81,17 @@ class SearchLayout extends Component {
     }
   }
 
+  onClickLogo () {
+    this.props.history.push({ pathname: '/' })
+  }
+
   render () {
     let { placeholder, inputValue, isMain } = this.state
 
     return (
       <StyledSearchLayout isMain={ isMain }>
         <NavBar isMain={ isMain }>
-          <Logo isMain={ isMain }>
+          <Logo isMain={ isMain } onClick={ this.onClickLogo }>
             Scan Games
           </Logo>
           <SearchBar isMain={ isMain }>
@@ -178,6 +182,7 @@ const Logo = styled.div`
   color: #FFFFFF;
   font-weight: 300;
   font-size: 3rem;
+  cursor: pointer;
   ${({ isMain }) => isMain
     ? css`
         top: 30vh;
