@@ -5,6 +5,9 @@ import {
   DropDown,
   StyledInput,
 } from '../../styled/ui-components'
+import {
+  bindAllMethods,
+} from '../../../utilities/common'
 
 class SearchLayout extends Component {
   constructor(props) {
@@ -25,10 +28,7 @@ class SearchLayout extends Component {
         },
       ],
     }
-    this.renderContent = this.renderContent.bind(this)
-    this.onChangeSearch = this.onChangeSearch.bind(this)
-    this.onKeyUp = this.onKeyUp.bind(this)
-    this.detectCurrentPath = this.detectCurrentPath.bind(this)
+    bindAllMethods(this)
   }
 
   componentDidMount () {
@@ -43,7 +43,7 @@ class SearchLayout extends Component {
     const currentPath = location.pathname
     let isMain = false
     //  NOTE: 최초 렌더시에는 props.location의 state값이 ud이다.
-    if (location.state === undefined) {
+    if (!location.state) {
       isMain = currentPath === '/'
     }
     this.setState({ isMain })
@@ -69,16 +69,20 @@ class SearchLayout extends Component {
 
   onKeyUp (e) {
     let { inputValue } = this.state
-    if (e.keyCode === 13 && inputValue.trim() !== '') {
-      //  TODO: 검색 API 연동
+    if (e.keyCode === 13) {
       this.props.history.push({
         pathname: '/search',
         state: {
           //  TODO: 각 페이지에서 라우트 이동시 이전 페이지 path 넘기기
-          prevPath: this.props.location.pathname
+          prevPath: this.props.location.pathname,
+          keyword: inputValue.trim(),
         }
       })
     }
+  }
+
+  onClickLogo () {
+    this.props.history.push({ pathname: '/' })
   }
 
   render () {
@@ -87,7 +91,7 @@ class SearchLayout extends Component {
     return (
       <StyledSearchLayout isMain={ isMain }>
         <NavBar isMain={ isMain }>
-          <Logo isMain={ isMain }>
+          <Logo isMain={ isMain } onClick={ this.onClickLogo }>
             Scan Games
           </Logo>
           <SearchBar isMain={ isMain }>
@@ -178,6 +182,7 @@ const Logo = styled.div`
   color: #FFFFFF;
   font-weight: 300;
   font-size: 3rem;
+  cursor: pointer;
   ${({ isMain }) => isMain
     ? css`
         top: 30vh;
