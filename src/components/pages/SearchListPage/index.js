@@ -133,6 +133,7 @@ class SearchListPage extends Component {
 const SearchListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 4vh 15%;
 `
 
 const SearchCount = styled.div`

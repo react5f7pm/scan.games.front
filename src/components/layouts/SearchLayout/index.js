@@ -250,9 +250,8 @@ const slideUpContent = keyframes`
 const ContentSection = styled.div`
   position: relative;
   background-color: whitesmoke;
-  height: 85vh;
+  height: 93vh;
   overflow: auto;
-  padding: 4vh 15%;
   animation: ${slideUpContent} 1.5s ease-in-out;
 `
 
