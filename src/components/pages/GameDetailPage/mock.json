@@ -1,0 +1,29 @@
+{
+  "productId": 1,
+  "name": "Assasin's Creed Odyssey 1",
+  "company" : "UbiSoft",
+  "originalPrice": 500000,
+  "thumbnail": "https://cdn-products.eneba.com/resized-products/f9jvrf3nwdgdil287sla_390x400_1x-0.jpg",
+  "priceList": [
+    {
+      "platformId": "STEAM",
+      "price": 100000
+    },
+    {
+      "platformId": "ORIGIN",
+      "price": 20000
+    },
+    {
+      "platformId": "PLAYSTATION",
+      "price": 30000
+    },
+    {
+      "platformId": "PLAYSTATION",
+      "price": 500000
+    },
+    {
+      "platformId": "PLAYSTATION",
+      "price": 510000
+    }
+  ]
+}
