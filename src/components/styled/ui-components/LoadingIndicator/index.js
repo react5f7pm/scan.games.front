@@ -16,15 +16,37 @@ const defaultProps = {
   height: '100%',
 }
 
-const PLATFORM_LOGO_PATH = ''
+const PLATFORM_LOGO_PATH = 'static/img/platform'
 
-export const LoadingIndicator = (props) => props.showLoading ?
-  <LoadingWrapper {...props}>
-    <AnimateDot delay="0.33" src="static/img/platform/playstation/logo.png" />
-    <AnimateDot delay="0.75" src="static/img/platform/steam/logo.png" />
-    <AnimateDot delay="1.2" src="static/img/platform/origin/logo.png" />
-  </LoadingWrapper>
-  : props.children
+const pickRandomLogoList = (count) => {
+  const logoList = [
+    '/playstation/logo.png',
+    '/steam/logo.png',
+    '/nintendo/logo.png',
+    '/origin/logo.png',
+  ]
+
+  let iteration = Math.random() * 10 + 1
+  let randomLogoList = logoList
+  while (iteration-- > 0) {
+    randomLogoList = randomLogoList.sort((a, b) => Math.random() < 0.5 ? 1 : -1)
+    randomLogoList = Math.random() < 0.5
+                     ? randomLogoList.reverse()
+                     : randomLogoList
+  }
+  return randomLogoList.splice(0, count)
+}
+
+export const LoadingIndicator = (props) => {
+  const [logo1, logo2, logo3] = pickRandomLogoList(3)
+  return props.showLoading
+         ? <LoadingWrapper {...props}>
+             <AnimateDot delay="0.33" src={ PLATFORM_LOGO_PATH + logo1 } />
+             <AnimateDot delay="0.75" src={ PLATFORM_LOGO_PATH + logo2 } />
+             <AnimateDot delay="1.2" src={ PLATFORM_LOGO_PATH + logo3 } />
+           </LoadingWrapper>
+         : props.children
+}
 
 LoadingIndicator.propTypes = propTypes
 LoadingIndicator.defaultProps = defaultProps
@@ -57,7 +79,7 @@ const LoadingWrapper = styled.div`
     left: 0;
   ` : ''}
 
-  background-color: #00000022;
+  background-color: #00000016;
 `
 
 const AnimateDot = styled.img`
