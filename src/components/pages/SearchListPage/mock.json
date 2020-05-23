@@ -61,21 +61,13 @@
   },
   {
     "productId": 4,
-    "name": "Assasin's Creed Odyssey 3",
+    "name": "Assasin's Creed Odyssey (Nintendo)",
     "thumbnail": "https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fassassins-creed-syndicate%2Fhome%2FACS-STD-2560x1440-635b7b6c86f18730071426375e7c4fe0bd831ddd.jpg?h=1080&resize=1&w=1920",
     "originalPrice": 88000,
     "priceList": [
       {
-        "platformId": "STEAM",
-        "price": 56000
-      },
-      {
-        "platformId": "ORIGIN",
-        "price": 12000
-      },
-      {
-        "platformId": "PLAYSTATION",
-        "price": 34000
+        "platformId": "NINTENDO",
+        "price": 66000
       }
     ]
   },

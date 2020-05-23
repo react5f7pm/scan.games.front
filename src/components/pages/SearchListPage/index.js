@@ -21,13 +21,17 @@ const PLATFORM = {
     name: 'Steam',
     logoImg: 'steam/logo-store.png',
   },
-  ORIGIN: {
-    name: 'Origin',
-    logoImg: 'origin/logo-store.png',
+  NINTENDO: {
+    name: 'Nintendo',
+    logoImg: 'nintendo/logo-store.png'
   },
   PLAYSTATION: {
     name: 'PlayStation',
     logoImg: 'playstation/logo-store.png',
+  },
+  ORIGIN: {
+    name: 'Origin',
+    logoImg: 'origin/logo-store.png',
   },
 }
 
@@ -87,8 +91,9 @@ class SearchListPage extends Component {
     const { name: platformName, logoImg } = PLATFORM[최저가.platformId]
 
     return (
-      <SearchItem key={ index } fadeDelay={ index }>
-        <ThumbnailImg src={ thumbnail } />
+      <SearchItem key={ index } fadeDelay={ index / 4.5 }>
+        <ThumbnailImg src={ thumbnail }
+                      onClick={ () => this.onClickThumbnail(thumbnail) } />
         <ProductInfo>
           <div className="product-name">{ name }</div>
           <div className="product-lowest-price">
@@ -114,6 +119,10 @@ class SearchListPage extends Component {
         </ProductInfo>
       </SearchItem>
     )
+  }
+
+  onClickThumbnail (thumbnail) {
+    window.open(thumbnail, '_blank')
   }
 
   async requestSearchList (keyword) {
@@ -157,9 +166,9 @@ const SearchItem = styled(StyledCard)`
   padding: 0;
 
   animation-name: ${() => fadeIn};
-  animation-delay: ${props => `${props.fadeDelay / 3.0}s`};
-  animation-duration: 1.5s;
-  animation-timing-function: ease-out;
+  animation-delay: ${props => `${props.fadeDelay}s`};
+  animation-duration: 1.2s;
+  animation-timing-function: ease-in-out;
   animation-fill-mode: both;
 `
 
@@ -180,6 +189,7 @@ const ThumbnailImg = styled.div`
   background-color: black;
 
   padding-top: 100%;
+  cursor: pointer;
 `
 
 const ProductInfo = styled.div`
