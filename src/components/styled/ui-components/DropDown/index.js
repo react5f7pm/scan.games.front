@@ -43,6 +43,7 @@ const DropDownContent = styled.div`
   background-color: #FFFFFF;
   min-width: 160px;
   border-radius: 18px;
+  z-index: 1;
 `
 const DropDownContainer = styled.div`
   position: relative;
